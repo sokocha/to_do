@@ -1,13 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @list.title %>
-</p>
 
-<% @list.items.each do |item| %>
-  <%= item %>
+
+
+
+<%= form_for Item.new do |item_form|%>
+  Name : <%= item_form.text_field :name %>
+  <%= item_form.hidden_field :list_id, :value => @list.id %>
+
+  <div class="actions">
+    <%= item_form.submit %>
+  </div>
 <% end %>
+
+<table>
+  <thead><p>
+  <strong><%= @list.title %></strong>
+</p></thead>
+  <tbody>
+    <% @items.each do |item| %>
+    <tr>
+      <td><%= item.name %> </td>
+    </tr>
+  </tbody> 
+<% end %>
+</table>
+
+
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>

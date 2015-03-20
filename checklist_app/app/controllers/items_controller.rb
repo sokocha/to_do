@@ -26,9 +26,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.save
-
-    @list = List.where(id: @item.list_id).map { list |list| }
+    @list = List.where(id: @item.list_id).map {|list| list}
     redirect_to list_path(@list)
+
   end
 
   # PATCH/PUT /items/1
