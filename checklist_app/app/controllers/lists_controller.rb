@@ -5,16 +5,20 @@ class ListsController < ApplicationController
   # GET /lists.json
   def index
     @lists = List.all
+    respond_with(@lists)
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
+    @items = @list.items
+    respond_with(@list)
   end
 
   # GET /lists/new
   def new
     @list = List.new
+    respond_with(@list)
   end
 
   # GET /lists/1/edit

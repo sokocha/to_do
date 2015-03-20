@@ -3,16 +3,18 @@ class ItemsController < ApplicationController
 
   # GET /items
   # GET /items.json
-  def index
-    @items = @list.items.all
-  end
+
 
   # GET /items/1
   # GET /items/1.json
+  def show
+    respond_with(@item)
+  end
 
   # GET /items/new
   def new
-    @item = @list.items.new
+    @item = Item.new
+    respond_with(@item)
   end
 
   # GET /items/1/edit
@@ -22,17 +24,11 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = @list.items.new(item_params)
+    @item = Item.new(item_params)
+    @item.save
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    @list = List.where(id: @item.list_id).map { list |list| }
+    redirect_to list_path(@list)
   end
 
   # PATCH/PUT /items/1
@@ -51,13 +47,13 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   # DELETE /items/1.json
-  # def destroy
-  #   @item.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    @item.destroy
+    respond_to do |format|
+      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
