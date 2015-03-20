@@ -5,7 +5,7 @@
 
 
 <%= form_for Item.new do |item_form|%>
-  Name : <%= item_form.text_field :name %>
+   <%= item_form.text_field :name, :placeholder => "e.g. 'go to the gym'" %>
   <%= item_form.hidden_field :list_id, :value => @list.id %>
 
   <div class="actions">
