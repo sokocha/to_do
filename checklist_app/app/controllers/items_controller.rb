@@ -4,17 +4,15 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = @list.items.all
   end
 
   # GET /items/1
   # GET /items/1.json
-  def show
-  end
 
   # GET /items/new
   def new
-    @item = Item.new
+    @item = @list.items.new
   end
 
   # GET /items/1/edit
@@ -24,7 +22,7 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
+    @item = @list.items.new(item_params)
 
     respond_to do |format|
       if @item.save
@@ -53,13 +51,13 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   # DELETE /items/1.json
-  def destroy
-    @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @item.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

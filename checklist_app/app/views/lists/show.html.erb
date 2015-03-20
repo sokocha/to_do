@@ -5,10 +5,9 @@
   <%= @list.title %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @list.user_id %>
-</p>
+<% @list.items.each do |item| %>
+  <%= item %>
+<% end %>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>
